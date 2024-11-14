@@ -37,7 +37,6 @@ const emit = defineEmits(['update']);
   flex-direction: column;
   margin: 0 1rem 1rem;
   border-radius: 1rem;
-  overflow: hidden;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
