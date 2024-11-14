@@ -11,6 +11,9 @@ importers:
       firebase:
         specifier: ^11.0.1
         version: 11.0.1
+      lucide-vue-next:
+        specifier: ^0.456.0
+        version: 0.456.0(vue@3.5.12)
       vue:
         specifier: ^3.5.12
         version: 3.5.12
@@ -952,6 +955,11 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  lucide-vue-next@0.456.0:
+    resolution: {integrity: sha512-KSBfTFpJV75GAUk5dfxWH4U4eJ0DpSeEZ7hMHkvLFF6ibMDZjXtxCxb/lm9AJ/T7auFwP82c/TLTJIiSNxvfkg==}
+    peerDependencies:
+      vue: '>=3.0.1'
 
   magic-string@0.30.12:
     resolution: {integrity: sha512-Ea8I3sQMVXr8JhN4z+H/d8zwo+tYDgHE9+5G4Wnrwhs0gaK9fXTKx0Tw5Xwsd/bCPTTZNRAdpyzvoeORe9LYpw==}
@@ -2245,6 +2253,10 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lucide-vue-next@0.456.0(vue@3.5.12):
+    dependencies:
+      vue: 3.5.12
 
   magic-string@0.30.12:
     dependencies:

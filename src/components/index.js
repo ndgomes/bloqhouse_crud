@@ -1,4 +1,5 @@
+import Header from './Header.vue';
 import ManageModal from './ManageModal.vue';
 import Loading from './Loading.vue';
 
-export default { ManageModal, Loading };
+export default { Header, ManageModal, Loading };

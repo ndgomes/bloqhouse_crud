@@ -22,7 +22,7 @@ const props = defineProps({
 
 const emit = defineEmits(['close']);
 
-const movie = ref({
+const movieData = ref({
   title: '',
   description: '',
   genre: '',
@@ -32,7 +32,7 @@ const movie = ref({
 });
 
 onMounted(() => {
-  movie.value = { ...movie.value, ...props.data };
+  movieData.value = { ...movieData.value, ...props.data };
 });
 
 // Submit handler for add/update movie
@@ -68,20 +68,20 @@ async function handleOnDelete() {
       <div class="modal-wrapper">
         <div class="modal-container">
           <button @click="emit('close')">X</button>
-          <input type="text" placeholder="Title" v-model="movie.title" />
-          <textarea placeholder="Description" v-model="movie.description" />
+          <input type="text" placeholder="Title" v-model="movieData.title" />
+          <textarea placeholder="Description" v-model="movieData.description" />
           <!-- TODO: Add checkbox for genre -->
-          <!-- <input type="checkbox" v-model="movie.genre" /> -->
-          <input type="text" placeholder="Rating" v-model="movie.rating" />
+          <!-- <input type="checkbox" v-model="movieData.genre" /> -->
+          <input type="text" placeholder="Rating" v-model="movieData.rating" />
           <input
             type="text"
             placeholder="Release Year"
-            v-model="movie.releaseYear"
+            v-model="movieData.releaseYear"
           />
           <input
             type="text"
             placeholder="Cover Image"
-            v-model="movie.coverImage"
+            v-model="movieData.coverImage"
           />
           <button @click="handleOnSubmit()">
             {{ isNew ? 'Add' : 'Save' }}

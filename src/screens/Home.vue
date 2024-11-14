@@ -27,6 +27,9 @@ function closeModal() {
 
 <template>
   <div>
+    <!-- Header with Add Movie Button -->
+    <Components.Header @add="toggleManageModal({}, true)" />
+
     <!-- Load Modal Component to Add or Update a Movie -->
     <Components.ManageModal
       v-if="showModal"
@@ -42,8 +45,5 @@ function closeModal() {
       <button @click="toggleManageModal(movie, false)">Update Movie</button>
       <br />
     </div>
-
-    <!-- Card to Create New Movie -->
-    <button @click="toggleManageModal({}, true)">Create New Movie</button>
   </div>
 </template>
