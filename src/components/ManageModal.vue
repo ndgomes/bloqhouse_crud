@@ -238,9 +238,10 @@ textarea {
 }
 
 .genre-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
+  accent-color: #ec0c5c;
 }
 
 .genre-container label {
@@ -265,6 +266,7 @@ textarea {
   align-items: center;
   gap: 0.5rem;
   border: solid 1px #ec0c5c;
+  width: 100%;
 }
 
 .submit-button:hover {
@@ -286,6 +288,7 @@ textarea {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .delete-button:hover {
@@ -305,6 +308,9 @@ textarea {
 @media (min-width: 1024px) {
   .modal-container {
     width: 40vw;
+  }
+  .genre-container {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 </style>
