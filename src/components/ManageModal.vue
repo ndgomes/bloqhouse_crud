@@ -250,10 +250,6 @@ textarea {
   font-size: 0.9rem;
 }
 
-.genre-container input {
-  margin-right: 0.2rem;
-}
-
 .submit-button {
   background-color: #ec0c5c;
   color: white;
