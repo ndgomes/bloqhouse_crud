@@ -41,7 +41,6 @@ const emit = defineEmits(['update']);
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  width: 90vw;
   height: 45rem;
 }
 
@@ -50,17 +49,18 @@ const emit = defineEmits(['update']);
 }
 
 .cover-image {
-  height: 60%;
+  min-height: 60%;
   background-size: cover;
   background-position: center;
 }
 
 .movie-info {
-  height: 40%;
+  min-height: 30%;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  justify-content: center;
 }
 
 .title {

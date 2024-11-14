@@ -8,6 +8,7 @@ import {
   doc,
   updateDoc,
 } from 'firebase/firestore';
+import { SquarePlus, Save, Trash2, X } from 'lucide-vue-next';
 
 const props = defineProps({
   data: {
@@ -25,18 +26,40 @@ const emit = defineEmits(['close']);
 const movieData = ref({
   title: '',
   description: '',
-  genre: '',
+  genre: [],
   rating: '',
   releaseYear: '',
   coverImage: '',
 });
 
+const genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Thriller'];
+
+// Get the current year dynamically
+const currentYear = new Date().getFullYear();
+
 onMounted(() => {
   movieData.value = { ...movieData.value, ...props.data };
 });
 
+// Validation required fields
+function isFormValid() {
+  return (
+    movieData.value.title &&
+    movieData.value.description &&
+    movieData.value.genre.length &&
+    movieData.value.rating &&
+    movieData.value.releaseYear &&
+    movieData.value.coverImage
+  );
+}
+
 // Submit handler for add/update movie
 async function handleOnSubmit() {
+  if (!isFormValid()) {
+    alert('Please fill out all fields.');
+    return;
+  }
+
   try {
     if (props.isNew) {
       // Add a new movie
@@ -53,6 +76,11 @@ async function handleOnSubmit() {
 
 // Delete movie handler
 async function handleOnDelete() {
+  if (!movieData.value.id) {
+    alert('Not available for delete.');
+    return;
+  }
+
   try {
     await deleteDoc(doc(db, 'movies', movieData.value.id));
     emit('close');
@@ -65,35 +93,77 @@ async function handleOnDelete() {
 <template>
   <transition name="modal">
     <div class="modal-overlay">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-          <button @click="emit('close')">X</button>
-          <input type="text" placeholder="Title" v-model="movieData.title" />
-          <textarea placeholder="Description" v-model="movieData.description" />
-          <!-- TODO: Add checkbox for genre -->
-          <!-- <input type="checkbox" v-model="movieData.genre" /> -->
-          <input type="text" placeholder="Rating" v-model="movieData.rating" />
+      <div class="modal-container">
+        <div class="modal-header">
+          <h2>{{ isNew ? 'Add New Movie' : 'Edit Movie' }}</h2>
+          <button class="close-button" @click="emit('close')"><X /></button>
+        </div>
+
+        <div class="modal-inputs">
           <input
             type="text"
+            placeholder="Title"
+            v-model="movieData.title"
+            required
+          />
+          <textarea
+            placeholder="Description (max 100 characters)"
+            v-model="movieData.description"
+            maxlength="100"
+            required
+          />
+
+          <div class="genre-container">
+            <label v-for="genre in genres" :key="genre">
+              <input type="checkbox" :value="genre" v-model="movieData.genre" />
+              {{ genre }}
+            </label>
+          </div>
+
+          <input
+            type="number"
+            placeholder="Rating (0-10)"
+            v-model="movieData.rating"
+            min="0"
+            max="10"
+            required
+          />
+          <input
+            type="number"
             placeholder="Release Year"
             v-model="movieData.releaseYear"
+            min="1800"
+            :max="currentYear"
+            required
           />
           <input
-            type="text"
-            placeholder="Cover Image"
+            type="url"
+            placeholder="Cover Image URL"
             v-model="movieData.coverImage"
+            required
           />
-          <button @click="handleOnSubmit()">
-            {{ isNew ? 'Add' : 'Save' }}
+        </div>
+
+        <div class="modal-buttons">
+          <button class="submit-button" @click="handleOnSubmit()">
+            <component :is="isNew ? SquarePlus : Save" />
+            {{ isNew ? 'Add Movie' : 'Save Changes' }}
           </button>
-          <button v-if="!isNew" @click.stop="handleOnDelete()">Delete</button>
+          <button
+            v-if="!isNew"
+            class="delete-button"
+            @click.stop="handleOnDelete()"
+          >
+            <Trash2 />
+            Delete Movie
+          </button>
         </div>
       </div>
     </div>
   </transition>
 </template>
 
-<style>
+<style scoped>
 .modal-overlay {
   z-index: 1;
   position: absolute;
@@ -107,43 +177,134 @@ async function handleOnDelete() {
   align-items: center;
 }
 
-.modal-wrapper {
+.modal-container {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 90vw;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.modal-header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  margin-bottom: 1rem;
 }
 
-.modal-container {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  width: 50vw;
-  max-width: 500px;
+.modal-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+  margin-right: auto;
 }
 
 input,
 textarea,
 button {
   width: 90%;
-  margin: 10px auto;
-  display: block;
-  padding: 8px;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  font-size: 1rem;
 }
 
-.close-button {
-  background: none;
+textarea {
+  resize: vertical;
+  height: 4rem;
+}
+
+.genre-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.genre-container label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.genre-container input {
+  margin-right: 0.2rem;
+}
+
+.submit-button {
+  background-color: #ec0c5c;
+  color: white;
   border: none;
-  font-size: 1.2em;
+  border-radius: 5px;
   cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border: solid 1px #ec0c5c;
 }
 
-button {
-  padding: 10px;
-  margin-top: 10px;
+.submit-button:hover {
+  background-color: white;
+  color: #ec0c5c;
+  border: solid 1px #ec0c5c;
+}
+
+.delete-button {
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  border: solid 1px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.delete-button:hover {
+  background-color: red;
+  color: white;
+  border: solid 1px red;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .modal-container {
+    width: 60vw;
+    max-width: 600px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal-container {
+    width: 40vw;
+  }
 }
 </style>
