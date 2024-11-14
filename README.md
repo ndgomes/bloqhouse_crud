@@ -1,29 +1,61 @@
-# bloqhouse_crud
+# Bloqhouse Movie CRUD App
 
-This template should help get you started developing with Vue 3 in Vite.
+![](https://raw.githubusercontent.com/ndgomes/bloqhouse_crud/refs/heads/main/src/assets/logo.svg?token=GHSAT0AAAAAACVXSQYGHD3GNCEI7J4QXMB4ZZWFYXA)
 
-## Recommended IDE Setup
+This is a simple web application built using **Vue.js 3** as the frontend framework and **Firebase** as the backend. The app allows users to manage their favorite movies by providing **CRUD** (Create, Read, Update, Delete) functionalities.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Features
 
-## Customize configuration
+- **Create**: Add a new movie to the list.
+- **Read**: View the list of favorite movies.
+- **Update**: Modify movie details.
+- **Delete**: Remove a movie from the list.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Technologies Used
 
-## Project Setup
+- **Frontend**: Vue.js 3
+- **Backend**: Firebase (Firestore Database)
 
-```sh
-pnpm install
+## Setup Instructions
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ndgomes/bloqhouse_crud.git
+cd bloqhouse_crud
 ```
 
-### Compile and Hot-Reload for Development
+### 2. Install dependencies
 
-```sh
-pnpm dev
+```bash
+npm install or pnpm install
 ```
 
-### Compile and Minify for Production
+### 3. Run the application
 
-```sh
-pnpm build
+```bash
+npm run dev
 ```
+
+## How to Use
+
+- On the homepage, you will see a list of your favorite movies.
+- To add a new movie, click on the **"Add Movie"** button.
+- To edit or update an existing movie, click the **"Edit"** button next to the movie.
+- To delete a movie, click the **"Delete"** button next to the movie you want to remove.
+
+## File Structure
+
+- **src/**
+  - **components/** – Contains Vue components like the modal for modal for manage movies and others.
+  - **firebase.js** – Contains Firebase initialization and Firestore configurations.
+  - **App.vue** – Main Vue component rendering the movie list and modals.
+  - **assets/** – Holds static files like images or stylesheets.
+
+## Notes
+
+- This project uses Vue.js 3 and Firebase Firestore to handle CRUD operations for movies.
+
+- You can add, update, and delete movies with the Firestore database handling persistence.
+
+- Make sure to follow the Firebase guidelines for security rules if you plan to deploy this app publicly.
