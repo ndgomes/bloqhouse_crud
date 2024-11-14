@@ -240,7 +240,7 @@ textarea {
 .genre-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
+  gap: 1rem;
   accent-color: #ec0c5c;
 }
 
@@ -248,6 +248,12 @@ textarea {
   display: flex;
   align-items: center;
   font-size: 0.9rem;
+}
+
+.genre-container input {
+  width: 1rem;
+  margin: 0 0.2rem 0 0;
+  padding: 0;
 }
 
 .submit-button {
