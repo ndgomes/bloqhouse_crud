@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import ManageModal from '@/components';
+import Components from '@/components';
 
 const props = defineProps({
   movies: {
@@ -28,7 +28,7 @@ function closeModal() {
 <template>
   <div>
     <!-- Load Modal Component to Add or Update a Movie -->
-    <ManageModal
+    <Components.ManageModal
       v-if="showModal"
       @close="closeModal"
       :data="movieData"
@@ -42,9 +42,6 @@ function closeModal() {
       <button @click="toggleManageModal(movie, false)">Update Movie</button>
       <br />
     </div>
-
-    <!-- !! REMOVE BEFORE MERGING -->
-    <pre>{{ movies }}</pre>
 
     <!-- Card to Create New Movie -->
     <button @click="toggleManageModal({}, true)">Create New Movie</button>
