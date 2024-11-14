@@ -55,7 +55,5 @@ npm run dev
 ## Notes
 
 - This project uses Vue.js 3 and Firebase Firestore to handle CRUD operations for movies.
-
 - You can add, update, and delete movies with the Firestore database handling persistence.
-
 - Make sure to follow the Firebase guidelines for security rules if you plan to deploy this app publicly.
