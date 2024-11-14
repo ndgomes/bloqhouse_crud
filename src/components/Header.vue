@@ -1,6 +1,5 @@
 <script setup>
 import { SquarePlus } from 'lucide-vue-next';
-import { defineEmits } from 'vue';
 
 const emit = defineEmits(['add']);
 </script>
