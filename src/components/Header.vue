@@ -67,4 +67,15 @@ span {
   background-color: slategray;
   margin: 1rem 0 1.5rem;
 }
+
+@media (max-width: 599px) {
+  p {
+    font-size: 1.5rem;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+}
 </style>
