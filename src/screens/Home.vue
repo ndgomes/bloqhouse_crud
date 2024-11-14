@@ -39,11 +39,46 @@ function closeModal() {
     />
 
     <!-- Movies Cards -->
-    <div v-for="movie in movies" :key="movie.id">
-      <p>Title: {{ movie.title }}</p>
-      <p>Description:{{ movie.description }}</p>
-      <button @click="toggleManageModal(movie, false)">Update Movie</button>
-      <br />
+    <div class="movie-card-container">
+      <div v-for="movie in movies" :key="movie.id" class="movie-card-wrapper">
+        <Components.MovieCard
+          :data="movie"
+          @update="toggleManageModal(movie, false)"
+        />
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.movie-card-container {
+  display: grid;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (max-width: 599px) {
+  .movie-card-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Two columns on medium screens */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .movie-card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Three columns on larger screens */
+@media (min-width: 1024px) {
+  .movie-card-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.movie-card-wrapper {
+  display: flex;
+  justify-content: center;
+}
+</style>

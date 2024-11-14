@@ -65,6 +65,6 @@ span {
 .separator {
   height: 0.05rem;
   background-color: slategray;
-  margin: 1rem 0 2rem;
+  margin: 1rem 0 1.5rem;
 }
 </style>

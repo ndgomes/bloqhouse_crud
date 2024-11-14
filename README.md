@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/ndgomes/bloqhouse_crud/refs/heads/main/src/assets/logo.svg?token=GHSAT0AAAAAACVXSQYG4EN54U2DT4FOAUNGZZWGVAA)
+![](./src/assets/logo.svg)
 
 # Bloqhouse Movie CRUD App
 
