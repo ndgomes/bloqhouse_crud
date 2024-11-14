@@ -44,11 +44,13 @@ onMounted(() => {
 // Validation required fields
 function isFormValid() {
   return (
-    movieData.value.title &&
-    movieData.value.description &&
+    movieData.value.title.length <= 80 &&
+    movieData.value.description.length <= 100 &&
     movieData.value.genre.length &&
-    movieData.value.rating &&
-    movieData.value.releaseYear &&
+    movieData.value.rating >= 1 &&
+    movieData.value.rating <= 10 &&
+    movieData.value.releaseYear >= 1800 &&
+    movieData.value.releaseYear <= currentYear &&
     movieData.value.coverImage
   );
 }
@@ -56,7 +58,7 @@ function isFormValid() {
 // Submit handler for add/update movie
 async function handleOnSubmit() {
   if (!isFormValid()) {
-    alert('Please fill out all fields.');
+    alert('Form is not valid. Please fill out all fields or try again.');
     return;
   }
 
@@ -69,6 +71,7 @@ async function handleOnSubmit() {
       await updateDoc(doc(db, 'movies', movieData.value.id), movieData.value);
     }
     emit('close');
+    window.location.reload();
   } catch (error) {
     console.error('!! Error adding/updating:', error);
   }
@@ -84,6 +87,7 @@ async function handleOnDelete() {
   try {
     await deleteDoc(doc(db, 'movies', movieData.value.id));
     emit('close');
+    window.location.reload();
   } catch (error) {
     console.error('!! Error deleting:', error);
   }
@@ -104,6 +108,7 @@ async function handleOnDelete() {
             type="text"
             placeholder="Title"
             v-model="movieData.title"
+            max="80"
             required
           />
           <textarea
