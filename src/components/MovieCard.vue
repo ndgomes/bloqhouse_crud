@@ -41,6 +41,7 @@ const emit = defineEmits(['update']);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   height: 45rem;
+  overflow-y: auto;
 }
 
 .movie-card:hover {
