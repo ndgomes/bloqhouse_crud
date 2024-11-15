@@ -10,6 +10,7 @@ This is a simple web application built using **Vue.js 3** as the frontend framew
 - **R**ead View the list of favorite movies.
 - **U**pdate Modify movie details.
 - **D**elete Remove a movie from the list.
+- Search for a movie in the list.
 
 ## Technologies Used
 
