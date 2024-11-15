@@ -99,7 +99,7 @@ async function handleOnDelete() {
     <div class="modal-overlay">
       <div class="modal-container">
         <div class="modal-header">
-          <h2>{{ isNew ? 'Add New Movie' : 'Edit Movie' }}</h2>
+          <h2>{{ isNew ? 'Add Movie' : 'Save changes' }}</h2>
           <button class="close-button" @click="emit('close')"><X /></button>
         </div>
 

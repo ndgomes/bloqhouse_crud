@@ -10,7 +10,7 @@ const emit = defineEmits(['add']);
 
     <div class="separator-vertical" />
 
-    <button @click="emit('add')"><SquarePlus />Add New Movie</button>
+    <button @click="emit('add')"><SquarePlus />Add Movie</button>
   </header>
 
   <div class="separator" />

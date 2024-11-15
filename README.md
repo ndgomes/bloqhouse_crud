@@ -6,10 +6,10 @@ This is a simple web application built using **Vue.js 3** as the frontend framew
 
 ## Features
 
-- **Create**: Add a new movie to the list.
-- **Read**: View the list of favorite movies.
-- **Update**: Modify movie details.
-- **Delete**: Remove a movie from the list.
+- **C**reate Add a new movie to the card list.
+- **R**ead View the list of favorite movies.
+- **U**pdate Modify movie details.
+- **D**elete Remove a movie from the list.
 
 ## Technologies Used
 
@@ -28,7 +28,7 @@ cd bloqhouse_crud
 ### 2. Install dependencies
 
 ```bash
-npm install or pnpm install
+npm install
 ```
 
 ### 3. Run the application
@@ -39,21 +39,15 @@ npm run dev
 
 ## How to Use
 
-- On the homepage, you will see a list of your favorite movies.
-- To add a new movie, click on the **"Add Movie"** button.
-- To edit or update an existing movie, click the **"Edit"** button next to the movie.
-- To delete a movie, click the **"Delete"** button next to the movie you want to remove.
+- On the homepage, you will see a list of cards of your favorite movies.
+- To add a new movie, click on the **"Add Movie"** button on Header.
+- To edit an existing movie, click on the movie you want to edit and a modal will appear to change the movie details and click on the **"Save Changes"** button.
+- To delete a movie, click on the movie you want to delete and a modal will appear and click on the **"Delete Movie"** button.
 
 ## File Structure
 
 - **src/**
-  - **components/** – Contains Vue components like the modal for modal for manage movies and others.
+  - **components/** – Contains Vue components like the manager modal, header, and movie card.
   - **firebase.js** – Contains Firebase initialization and Firestore configurations.
-  - **App.vue** – Main Vue component rendering the movie list and modals.
+  - **App.vue** – Main Vue component rendering the list of movie cards.
   - **assets/** – Holds static files like images or stylesheets.
-
-## Notes
-
-- This project uses Vue.js 3 and Firebase Firestore to handle CRUD operations for movies.
-- You can add, update, and delete movies with the Firestore database handling persistence.
-- Make sure to follow the Firebase guidelines for security rules if you plan to deploy this app publicly.
