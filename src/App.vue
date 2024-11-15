@@ -1,4 +1,5 @@
 <script setup>
+import { Analytics } from '@vercel/analytics/vue';
 import { ref, onMounted } from 'vue';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '@/firebase';
@@ -23,6 +24,8 @@ onMounted(async () => {
 </script>
 
 <template>
+  <Analytics />
+
   <main>
     <Components.Loading v-if="isLoading" />
     <Home v-else :movies="db_movies" />
