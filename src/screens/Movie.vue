@@ -325,5 +325,16 @@ function backToHome() {
   .movie-details-container {
     flex-direction: column;
   }
+  .movie-details-container .movie-cover {
+    margin: 0 0 2rem 0;
+    flex-shrink: 0;
+  }
+  .movie-details-container textarea {
+    height: 70px;
+  }
+  .movie-details-container .genre-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>
