@@ -1,9 +1,10 @@
 <script setup>
 import { ref, watch, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import Components from '@/components';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/firebase';
+import Components from '@/components';
+import { Save, Ban, Popcorn, Trash2 } from 'lucide-vue-next';
 
 const route = useRoute();
 const router = useRouter();
@@ -171,10 +172,19 @@ function backToHome() {
         </div>
 
         <div class="actions">
-          <button v-if="isEditing" @click="handleOnSubmit">Save Changes</button>
+          <button v-if="isEditing" @click="handleOnSubmit">
+            <Save />Save Changes
+          </button>
+          <button v-if="isEditing" @click="isEditing = false">
+            <Ban />Cancel
+          </button>
 
-          <button v-if="!isEditing" @click="isEditing = true">Edit</button>
-          <button v-if="!isEditing" @click="handleOnDelete">Delete</button>
+          <button v-if="!isEditing" @click="isEditing = true">
+            <Popcorn />Edit
+          </button>
+          <button v-if="!isEditing" @click="handleOnDelete">
+            <Trash2 />Delete
+          </button>
         </div>
       </div>
     </div>
@@ -195,6 +205,7 @@ function backToHome() {
 }
 
 .cover-image {
+  border-radius: 1rem;
   width: 200px;
   height: auto;
 }
@@ -223,11 +234,34 @@ function backToHome() {
 
 .movie-info button {
   padding: 8px 16px;
-  font-size: 16px;
+  background-color: #ec0c5c;
+  color: white;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border: solid 1px #ec0c5c;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.movie-info button:hover {
+  background-color: white;
+  color: #ec0c5c;
+  border: solid 1px #ec0c5c;
 }
 
 .movie-info button:hover {
   background-color: #f0f0f0;
+}
+
+@media (max-width: 1024px) {
+  .movie-details-container {
+    flex-direction: column;
+  }
 }
 </style>
