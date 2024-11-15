@@ -31,5 +31,3 @@ onMounted(async () => {
     <Home v-else :movies="db_movies" />
   </main>
 </template>
-
-<style scoped></style>
