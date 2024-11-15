@@ -108,7 +108,6 @@ const emit = defineEmits(['update']);
   background-color: #d80b53;
 }
 
-/* Responsive width */
 @media (min-width: 600px) {
   .movie-card {
     width: 40vw;

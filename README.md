@@ -43,6 +43,7 @@ npm run dev
 - To add a new movie, click on the **"Add Movie"** button on Header.
 - To edit an existing movie, click on the movie you want to edit and a modal will appear to change the movie details and click on the **"Save Changes"** button.
 - To delete a movie, click on the movie you want to delete and a modal will appear and click on the **"Delete Movie"** button.
+- To search for a movie, type in the search bar and the movies will be filtered based on the search query.
 
 ## File Structure
 
