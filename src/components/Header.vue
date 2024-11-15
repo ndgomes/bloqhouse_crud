@@ -1,7 +1,14 @@
 <script setup>
-import { SquarePlus } from 'lucide-vue-next';
+import { Undo2, SquarePlus } from 'lucide-vue-next';
 
-const emit = defineEmits(['add']);
+const emit = defineEmits(['clickAction']);
+
+const props = defineProps({
+  withBackButton: {
+    type: Boolean,
+    required: true,
+  },
+});
 </script>
 
 <template>
@@ -10,7 +17,10 @@ const emit = defineEmits(['add']);
 
     <div class="separator-vertical" />
 
-    <button @click="emit('add')"><SquarePlus />Add Movie</button>
+    <button @click="emit('clickAction')">
+      <component :is="props.withBackButton ? Undo2 : SquarePlus" />
+      {{ props.withBackButton ? 'Back' : 'Add Movie' }}
+    </button>
   </header>
 
   <div class="separator" />
@@ -73,7 +83,6 @@ span {
   }
 
   button {
-    padding: 0.5rem 1rem;
     font-size: 0.75rem;
   }
 }

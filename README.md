@@ -6,11 +6,10 @@ This is a simple web application built using **Vue.js 3** as the frontend framew
 
 ## Features
 
-- **C**reate Add a new movie to the card list.
-- **R**ead View the list of favorite movies.
-- **U**pdate Modify movie details.
-- **D**elete Remove a movie from the list.
-- Search for a movie in the list.
+- **C**reate - Add a new movie to the card list.
+- **R**ead - View the list of favorite movies.
+- **U**pdate - Modify movie details.
+- **D**elete - Remove a movie from the list.
 
 ## Technologies Used
 
@@ -42,8 +41,8 @@ npm run dev
 
 - On the homepage, you will see a list of cards of your favorite movies.
 - To add a new movie, click on the **"Add Movie"** button on Header.
-- To edit an existing movie, click on the movie you want to edit and a modal will appear to change the movie details and click on the **"Save Changes"** button.
-- To delete a movie, click on the movie you want to delete and a modal will appear and click on the **"Delete Movie"** button.
+- To edit an existing movie, click on the movie you want to edit and you will be redirected to the movie details page and then click on the **"Edit"** button.
+- To delete a movie, click on the movie you want to delete and you will be redirected to the movie details page and then click on the **"Delete"** button.
 - To search for a movie, type in the search bar and the movies will be filtered based on the search query.
 
 ## File Structure

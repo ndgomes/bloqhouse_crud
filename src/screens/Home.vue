@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import Components from '@/components';
+
+const router = useRouter();
 
 const props = defineProps({
   movies: {
@@ -9,9 +12,7 @@ const props = defineProps({
   },
 });
 
-const showModal = ref(false);
-const movieData = ref({});
-const isNewMovie = ref(false);
+const showAddModal = ref(false);
 const searchQuery = ref('');
 
 function handleSearchUpdate(value) {
@@ -30,30 +31,26 @@ const filteredMovies = computed(() => {
   );
 });
 
-// Toggle the modal and prepare data for add or update a movie
-function toggleManageModal(data = {}, isNew = false) {
-  movieData.value = data;
-  isNewMovie.value = isNew;
-  showModal.value = true;
+function handleOnClickCard(id) {
+  router.push(`/${id}`);
 }
 
-function closeModal() {
-  showModal.value = false;
+function openAddModal() {
+  showAddModal.value = true;
+}
+
+function closeAddModal() {
+  showAddModal.value = false;
 }
 </script>
 
 <template>
   <div>
-    <!-- Header with Add Movie Button -->
-    <Components.Header @add="toggleManageModal({}, true)" />
-
     <!-- Load Modal Component to Add or Update a Movie -->
-    <Components.ManageModal
-      v-if="showModal"
-      @close="closeModal"
-      :data="movieData"
-      :isNew="isNewMovie"
-    />
+    <Components.AddMovieModal v-if="showAddModal" @close="closeAddModal" />
+
+    <!-- Header with Add Movie Button -->
+    <Components.Header @clickAction="openAddModal" :withBackButton="false" />
 
     <!-- Search Bar -->
     <Components.Search @searching="handleSearchUpdate" />
@@ -61,13 +58,14 @@ function closeModal() {
     <!-- Movies Cards -->
     <div class="movie-card-container">
       <div
+        class="movie-card-wrapper"
         v-for="movie in filteredMovies"
         :key="movie.id"
-        class="movie-card-wrapper"
       >
+        <!-- @clickCard="toggleManageModal(movie, false)" -->
         <Components.MovieCard
           :data="movie"
-          @update="toggleManageModal(movie, false)"
+          @clickCard="handleOnClickCard(movie.id)"
         />
       </div>
     </div>
@@ -78,6 +76,11 @@ function closeModal() {
 .movie-card-container {
   display: grid;
   gap: 1rem;
+  justify-content: center;
+}
+
+.movie-card-wrapper {
+  display: flex;
   justify-content: center;
 }
 
@@ -100,10 +103,5 @@ function closeModal() {
   .movie-card-container {
     grid-template-columns: repeat(3, 1fr);
   }
-}
-
-.movie-card-wrapper {
-  display: flex;
-  justify-content: center;
 }
 </style>

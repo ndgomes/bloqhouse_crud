@@ -1,23 +1,13 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { db } from '@/firebase';
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  updateDoc,
-} from 'firebase/firestore';
-import { SquarePlus, Save, Trash2, X } from 'lucide-vue-next';
+import { addDoc, collection } from 'firebase/firestore';
+import { SquarePlus, X } from 'lucide-vue-next';
 
 const props = defineProps({
   data: {
     type: Object,
     default: () => ({}),
-  },
-  isNew: {
-    type: Boolean,
-    default: true,
   },
 });
 
@@ -37,10 +27,6 @@ const genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Thriller'];
 // Get the current year dynamically
 const currentYear = new Date().getFullYear();
 
-onMounted(() => {
-  movieData.value = { ...movieData.value, ...props.data };
-});
-
 // Validation required fields
 function isFormValid() {
   return (
@@ -55,7 +41,7 @@ function isFormValid() {
   );
 }
 
-// Submit handler for add/update movie
+// Submit handler for add movie
 async function handleOnSubmit() {
   if (!isFormValid()) {
     alert('Form is not valid. Please fill out all fields or try again.');
@@ -63,33 +49,12 @@ async function handleOnSubmit() {
   }
 
   try {
-    if (props.isNew) {
-      // Add a new movie
-      await addDoc(collection(db, 'movies'), movieData.value);
-    } else {
-      // Update an existing movie
-      await updateDoc(doc(db, 'movies', movieData.value.id), movieData.value);
-    }
+    await addDoc(collection(db, 'movies'), movieData.value);
+
     emit('close');
     window.location.reload();
   } catch (error) {
-    console.error('!! Error adding/updating:', error);
-  }
-}
-
-// Delete movie handler
-async function handleOnDelete() {
-  if (!movieData.value.id) {
-    alert('Not available for delete.');
-    return;
-  }
-
-  try {
-    await deleteDoc(doc(db, 'movies', movieData.value.id));
-    emit('close');
-    window.location.reload();
-  } catch (error) {
-    console.error('!! Error deleting:', error);
+    console.error('!! Error adding:', error);
   }
 }
 </script>
@@ -99,7 +64,7 @@ async function handleOnDelete() {
     <div class="modal-overlay">
       <div class="modal-container">
         <div class="modal-header">
-          <h2>{{ isNew ? 'Add Movie' : 'Save changes' }}</h2>
+          <h2>Add Movie</h2>
           <button class="close-button" @click="emit('close')"><X /></button>
         </div>
 
@@ -149,20 +114,10 @@ async function handleOnDelete() {
           />
         </div>
 
-        <div class="modal-buttons">
-          <button class="submit-button" @click="handleOnSubmit()">
-            <component :is="isNew ? SquarePlus : Save" />
-            {{ isNew ? 'Add Movie' : 'Save Changes' }}
-          </button>
-          <button
-            v-if="!isNew"
-            class="delete-button"
-            @click.stop="handleOnDelete()"
-          >
-            <Trash2 />
-            Delete Movie
-          </button>
-        </div>
+        <button class="submit-button" @click="handleOnSubmit()">
+          <SquarePlus />
+          Add Movie
+        </button>
       </div>
     </div>
   </transition>
@@ -206,12 +161,6 @@ async function handleOnDelete() {
   align-items: center;
 }
 
-.modal-buttons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
 .close-button {
   background: none;
   border: none;
@@ -238,7 +187,7 @@ button {
 }
 
 textarea {
-  resize: vertical;
+  resize: none;
   height: 4rem;
 }
 
@@ -264,7 +213,6 @@ textarea {
 .submit-button {
   background-color: #ec0c5c;
   color: white;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
@@ -274,34 +222,13 @@ textarea {
   gap: 0.5rem;
   border: solid 1px #ec0c5c;
   width: 100%;
+  margin-top: 1rem;
 }
 
 .submit-button:hover {
   background-color: white;
   color: #ec0c5c;
   border: solid 1px #ec0c5c;
-}
-
-.delete-button {
-  background-color: white;
-  color: black;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 0.5rem;
-  border: solid 1px black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-.delete-button:hover {
-  background-color: red;
-  color: white;
-  border: solid 1px red;
 }
 
 /* Responsive */

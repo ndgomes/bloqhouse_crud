@@ -6,11 +6,11 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['update']);
+const emit = defineEmits(['clickCard']);
 </script>
 
 <template>
-  <div class="movie-card" @click="emit('update')">
+  <div class="movie-card" @click="emit('clickCard')">
     <img
       class="cover-image"
       :src="props.data.coverImage"
