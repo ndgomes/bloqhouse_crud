@@ -82,7 +82,7 @@ async function handleOnSubmit() {
       doc(db, 'movies', movieData.value.id),
       movieData.value
     ).then(() => {
-      window.location.reload();
+      router.push('/');
     });
   } catch (error) {
     console.error('!! Error adding/updating:', error);
@@ -98,7 +98,7 @@ async function handleOnDelete() {
 
   try {
     await deleteDoc(doc(db, 'movies', movieData.value.id)).then(() => {
-      window.location.reload();
+      router.push('/');
     });
   } catch (error) {
     console.error('!! Error deleting:', error);
