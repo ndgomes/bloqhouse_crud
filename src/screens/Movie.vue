@@ -127,13 +127,15 @@ function backToHome() {
       <div class="movie-info">
         <div v-if="!isEditing">
           <h2>{{ movieData.title }}</h2>
-          <p>{{ movieData.description }}</p>
-          <p><strong>Genre:</strong> {{ movieData.genre.join(', ') }}</p>
-          <p><strong>Rating:</strong> {{ movieData.rating }}</p>
-          <p><strong>Release Year:</strong> {{ movieData.releaseYear }}</p>
+          <span>{{ movieData.description }}</span>
+          <div class="movie-info-details">
+            <p><strong>Genre:</strong> {{ movieData.genre.join(', ') }}</p>
+            <p><strong>Rating:</strong> {{ movieData.rating }}/10 ⭐️</p>
+            <p><strong>Release Year:</strong> {{ movieData.releaseYear }}</p>
+          </div>
         </div>
 
-        <div v-else>
+        <div v-else class="movie-info-inputs">
           <input
             type="text"
             v-model="movieData.title"
@@ -173,14 +175,18 @@ function backToHome() {
         </div>
 
         <div class="actions">
-          <button v-if="isEditing" @click="handleOnSubmit">
+          <button class="white-button" v-if="isEditing" @click="handleOnSubmit">
             <Save />Save Changes
           </button>
           <button v-if="isEditing" @click="isEditing = false">
             <Ban />Cancel
           </button>
 
-          <button v-if="!isEditing" @click="isEditing = true">
+          <button
+            class="white-button"
+            v-if="!isEditing"
+            @click="isEditing = true"
+          >
             <Popcorn />Edit
           </button>
           <button v-if="!isEditing" @click="handleOnDelete">
@@ -196,44 +202,103 @@ function backToHome() {
 .movie-details-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
 }
 
 .movie-cover {
-  margin-right: 20px;
+  margin: 0 3rem 2rem 1rem;
   flex-shrink: 0;
 }
 
 .cover-image {
   border-radius: 1rem;
-  width: 200px;
+  width: 250px;
   height: auto;
 }
 
 .movie-info {
-  max-width: 500px;
   flex-grow: 1;
+}
+
+.movie-info h2 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.movie-info span {
+  font-size: 1rem;
+  color: slategray;
+  font-weight: 600;
+}
+
+.movie-info-details {
+  margin-top: 1rem;
+}
+
+.movie-info-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: 1rem;
+}
+
+.movie-info p {
+  margin-bottom: 0.6rem;
 }
 
 .movie-info input,
 .movie-info textarea {
-  width: 100%;
+  width: auto;
   margin: 10px 0;
   padding: 8px;
-  font-size: 16px;
+  resize: none;
+  border: solid 1px #ec0c5c;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
 .movie-info .genre-container {
   margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  gap: 1rem;
+}
+
+.movie-info .genre-container input {
+  width: 1rem;
+  accent-color: #ec0c5c;
 }
 
 .movie-info .actions {
   display: flex;
+  width: auto;
   gap: 10px;
 }
 
-.movie-info button {
+.white-button {
+  background-color: white;
+  color: #ec0c5c;
+  border: solid 1px #ec0c5c;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.white-button:hover {
+  background-color: #ec0c5c;
+  color: white;
+  border: solid 1px #ec0c5c;
+}
+
+.movie-info button:not(.white-button) {
   padding: 8px 16px;
   background-color: #ec0c5c;
   color: white;
@@ -250,14 +315,10 @@ function backToHome() {
   margin-top: 1rem;
 }
 
-.movie-info button:hover {
+.movie-info button:not(.white-button):hover {
   background-color: white;
   color: #ec0c5c;
   border: solid 1px #ec0c5c;
-}
-
-.movie-info button:hover {
-  background-color: #f0f0f0;
 }
 
 @media (max-width: 1024px) {
