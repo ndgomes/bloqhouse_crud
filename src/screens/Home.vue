@@ -36,6 +36,13 @@ function handleOnClickCard(id) {
 }
 
 function openAddModal() {
+  if (props.movies.length >= 15) {
+    alert(
+      `It's not possible to add more than 15 movies. Please delete one first.`
+    );
+    return;
+  }
+
   showAddModal.value = true;
 }
 
@@ -67,6 +74,10 @@ function closeAddModal() {
           :data="movie"
           @clickCard="handleOnClickCard(movie.id)"
         />
+      </div>
+
+      <div v-if="filteredMovies.length === 0">
+        <p>The movie was not found. Try searching for another movie.</p>
       </div>
     </div>
   </div>
