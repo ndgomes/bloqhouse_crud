@@ -1,4 +1,8 @@
 <script setup>
+import { ref, onMounted, computed } from 'vue';
+
+const emit = defineEmits(['clickCard']);
+
 const props = defineProps({
   data: {
     type: Object,
@@ -6,16 +10,34 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['clickCard']);
+const fallbackCoverImage =
+  'https://m.media-amazon.com/images/I/61s8vyZLSzL._AC_UF894,1000_QL80_.jpg';
+
+const isImageValid = ref(false);
+
+async function isValidImage(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+}
+
+// Validate the image when the component is mounted
+onMounted(async () => {
+  isImageValid.value = await isValidImage(props.data.coverImage);
+});
+
+// Computed property for the valid image URL
+const validCoverImage = computed(() => {
+  return isImageValid.value ? props.data.coverImage : fallbackCoverImage;
+});
 </script>
 
 <template>
   <div class="movie-card" @click="emit('clickCard')">
-    <img
-      class="cover-image"
-      :src="props.data.coverImage"
-      alt="movie cover image"
-    />
+    <img class="cover-image" :src="validCoverImage" alt="movie cover image" />
 
     <div class="movie-info">
       <h3 class="title">{{ props.data.title }}</h3>

@@ -3,6 +3,9 @@ import { ref } from 'vue';
 import { db } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { SquarePlus, X } from 'lucide-vue-next';
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
 
 const props = defineProps({
   data: {
@@ -44,15 +47,22 @@ function isFormValid() {
 // Submit handler for add movie
 async function handleOnSubmit() {
   if (!isFormValid()) {
-    alert('Form is not valid. Please fill out all fields or try again.');
+    toast.error('Form is not valid. Please fill out all fields or try again.');
     return;
   }
 
   try {
     await addDoc(collection(db, 'movies'), movieData.value);
 
+    toast.success(`${movieData.value.title} - Movie added successfully.`, {
+      duration: 300,
+    });
+
     emit('close');
-    window.location.reload();
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   } catch (error) {
     console.error('!! Error adding:', error);
   }

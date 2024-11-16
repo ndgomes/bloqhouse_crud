@@ -2,7 +2,9 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import Components from '@/components';
+import { useToast } from 'vue-toastification';
 
+const toast = useToast();
 const router = useRouter();
 
 const props = defineProps({
@@ -37,7 +39,7 @@ function handleOnClickCard(id) {
 
 function openAddModal() {
   if (props.movies.length >= 15) {
-    alert(
+    toast.error(
       `It's not possible to add more than 15 movies. Please delete one first.`
     );
     return;

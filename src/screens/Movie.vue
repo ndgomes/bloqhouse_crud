@@ -5,7 +5,9 @@ import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/firebase';
 import Components from '@/components';
 import { Save, Ban, Popcorn, Trash2 } from 'lucide-vue-next';
+import { useToast } from 'vue-toastification';
 
+const toast = useToast();
 const route = useRoute();
 const router = useRouter();
 
@@ -45,14 +47,32 @@ watch(
   }
 );
 
-onMounted(() => {
+async function isValidImage(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+}
+
+onMounted(async () => {
   // Redirect to home if the movie is not found
   if (!selectedMovieData.value) {
     router.push('/');
     return;
   }
 
-  movieData.value = { ...movieData.value, ...selectedMovieData.value };
+  const selectedMovie = { ...selectedMovieData.value };
+  const isValid = await isValidImage(selectedMovie.coverImage);
+
+  movieData.value = {
+    ...movieData.value,
+    ...selectedMovie,
+    coverImage: isValid
+      ? selectedMovie.coverImage
+      : 'https://m.media-amazon.com/images/I/61s8vyZLSzL._AC_UF894,1000_QL80_.jpg',
+  };
 });
 
 // Validation required fields
@@ -72,7 +92,7 @@ function isFormValid() {
 // Submit handler for add/update movie
 async function handleOnSubmit() {
   if (!isFormValid()) {
-    alert('Form is not valid. Please fill out all fields or try again.');
+    toast.error('Form is not valid. Please fill out all fields or try again.');
     return;
   }
 
@@ -93,7 +113,7 @@ async function handleOnSubmit() {
 // Delete movie handler
 async function handleOnDelete() {
   if (!movieData.value.id) {
-    alert('Not available for delete.');
+    toast.error('Not available for delete.');
     return;
   }
 
