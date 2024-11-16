@@ -26,7 +26,7 @@ function handleInputChange(event) {
 <style scoped>
 .search-container {
   display: flex;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   gap: 0.5rem;
   background-color: rgb(211, 211, 211);
   border-radius: 2rem;

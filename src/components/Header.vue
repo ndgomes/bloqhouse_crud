@@ -72,7 +72,7 @@ span {
 .separator {
   height: 0.05rem;
   background-color: slategray;
-  margin: 1rem 0 1.5rem;
+  margin: 1rem 0;
 }
 
 @media (max-width: 599px) {
