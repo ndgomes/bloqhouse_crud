@@ -64,6 +64,12 @@ function closeAddModal() {
     <!-- Search Bar -->
     <Components.Search @searching="handleSearchUpdate" />
 
+    <!-- Movies count -->
+    <p class="movie-count">
+      <strong>Movies:</strong>
+      {{ filteredMovies.length }}/<span>15</span>
+    </p>
+
     <!-- Movies Cards -->
     <div class="movie-card-container">
       <div
@@ -95,6 +101,23 @@ function closeAddModal() {
 .movie-card-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.movie-count {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: rgb(113, 113, 113);
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 0.5rem;
+}
+
+.movie-count span {
+  color: #ec0c5c;
+}
+
+.movie-count strong {
+  margin-right: 0.3rem;
 }
 
 /* One column on small screens */

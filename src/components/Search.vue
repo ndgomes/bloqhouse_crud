@@ -15,7 +15,7 @@ function handleInputChange(event) {
     <Search />
     <input
       type="text"
-      placeholder="Search for a movie..."
+      placeholder="Search..."
       :value="inputValue"
       @input="handleInputChange"
       max="80"
