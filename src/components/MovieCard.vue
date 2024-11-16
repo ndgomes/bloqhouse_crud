@@ -63,8 +63,7 @@ const validCoverImage = computed(() => {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   height: 45rem;
-  width: 100vw;
-  overflow-y: auto;
+  width: 90vw;
 }
 
 .movie-card:hover {
@@ -75,6 +74,7 @@ const validCoverImage = computed(() => {
   min-height: 60%;
   background-size: cover;
   background-position: center;
+  border-radius: 1rem 1rem 0 0;
 }
 
 .movie-info {

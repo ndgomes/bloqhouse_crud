@@ -154,7 +154,6 @@ async function handleOnSubmit() {
   width: 90vw;
   max-width: 500px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  overflow-y: auto;
   max-height: 90vh;
 }
 

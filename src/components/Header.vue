@@ -28,7 +28,6 @@ const props = defineProps({
 
 <style scoped>
 header {
-  width: 100vw;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -45,7 +44,6 @@ button {
   border-radius: 0.5rem;
   cursor: pointer;
   font-size: 1rem;
-  width: auto;
   margin: 0;
 }
 
@@ -83,7 +81,7 @@ span {
   }
 
   button {
-    font-size: 0.75rem;
+    width: 100%;
   }
 }
 </style>
