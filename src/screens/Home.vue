@@ -104,7 +104,7 @@ function closeAddModal() {
 }
 
 .movie-count {
-  margin: 0 1rem 1rem 0;
+  margin: 0 0.5rem 1rem 0;
   font-size: 1rem;
   color: rgb(113, 113, 113);
   display: flex;
