@@ -45,10 +45,12 @@ function openAddModal() {
     return;
   }
 
+  document.body.style.overflow = 'hidden';
   showAddModal.value = true;
 }
 
 function closeAddModal() {
+  document.body.style.overflow = 'auto';
   showAddModal.value = false;
 }
 </script>

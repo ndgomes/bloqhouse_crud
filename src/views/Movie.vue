@@ -130,6 +130,16 @@ async function handleOnDelete() {
 function backToHome() {
   router.push('/');
 }
+
+function openDeleteModal() {
+  document.body.style.overflow = 'hidden';
+  showDeleteModal.value = true;
+}
+
+function closeDeleteModal() {
+  document.body.style.overflow = 'auto';
+  showDeleteModal.value = false;
+}
 </script>
 
 <template>
@@ -138,7 +148,7 @@ function backToHome() {
     <Components.DeleteModal
       v-if="showDeleteModal"
       @confirmDelete="handleOnDelete"
-      @close="showDeleteModal = false"
+      @close="closeDeleteModal"
     />
 
     <!-- Header with Add Movie Button -->
@@ -217,7 +227,7 @@ function backToHome() {
           >
             <Popcorn />Edit
           </button>
-          <button v-if="!isEditing" @click="showDeleteModal = true">
+          <button v-if="!isEditing" @click="openDeleteModal">
             <Trash2 />Delete
           </button>
         </div>

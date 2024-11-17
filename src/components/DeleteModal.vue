@@ -1,7 +1,12 @@
 <script setup>
+import { onMounted } from 'vue';
 import { X, ThumbsDown, ThumbsUp } from 'lucide-vue-next';
 
 const emit = defineEmits(['close, confirmDelete']);
+
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
 </script>
 
 <template>

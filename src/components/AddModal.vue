@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { db } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { SquarePlus, X } from 'lucide-vue-next';
@@ -67,6 +67,10 @@ async function handleOnSubmit() {
     console.error('!! Error adding:', error);
   }
 }
+
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
 </script>
 
 <template>
