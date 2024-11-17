@@ -139,7 +139,6 @@ function openDeleteModal() {
 function closeDeleteModal() {
   document.body.style.overflow = 'auto';
   showDeleteModal.value = false;
-  router.push('/');
 }
 </script>
 
