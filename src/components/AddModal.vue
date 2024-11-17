@@ -149,7 +149,6 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: auto;
 }
 
 .modal-container {
@@ -160,6 +159,7 @@ onMounted(() => {
   max-width: 500px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   max-height: 90vh;
+  overflow: scroll;
 }
 
 .modal-header {
