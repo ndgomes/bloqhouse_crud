@@ -85,12 +85,14 @@ onMounted(() => {
         <div class="modal-inputs">
           <input
             type="text"
+            name="title"
             placeholder="Title"
             v-model="movieData.title"
             max="80"
             required
           />
           <textarea
+            name="description"
             placeholder="Description (max 100 characters)"
             v-model="movieData.description"
             maxlength="100"
@@ -99,12 +101,18 @@ onMounted(() => {
 
           <div class="genre-container">
             <label v-for="genre in genres" :key="genre">
-              <input type="checkbox" :value="genre" v-model="movieData.genre" />
+              <input
+                type="checkbox"
+                name="genre"
+                :value="genre"
+                v-model="movieData.genre"
+              />
               {{ genre }}
             </label>
           </div>
 
           <input
+            name="rating"
             type="number"
             placeholder="Rating (0-10)"
             v-model="movieData.rating"
@@ -113,6 +121,7 @@ onMounted(() => {
             required
           />
           <input
+            name="releaseYear"
             type="number"
             placeholder="Release Year"
             v-model="movieData.releaseYear"
@@ -121,6 +130,7 @@ onMounted(() => {
             required
           />
           <input
+            name="coverImage"
             type="url"
             placeholder="Cover Image URL"
             v-model="movieData.coverImage"
@@ -128,7 +138,11 @@ onMounted(() => {
           />
         </div>
 
-        <button class="submit-button" @click="handleOnSubmit()">
+        <button
+          class="submit-button"
+          @click="handleOnSubmit()"
+          data-testid="submit-movie"
+        >
           <SquarePlus />
           Add Movie
         </button>

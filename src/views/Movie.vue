@@ -139,6 +139,7 @@ function openDeleteModal() {
 function closeDeleteModal() {
   document.body.style.overflow = 'auto';
   showDeleteModal.value = false;
+  router.push('/');
 }
 </script>
 
@@ -175,23 +176,31 @@ function closeDeleteModal() {
 
         <div v-else class="movie-info-inputs">
           <input
+            name="title"
             type="text"
             v-model="movieData.title"
             placeholder="Title"
             max="80"
           />
           <textarea
+            name="description"
             v-model="movieData.description"
             placeholder="Description (max 100 characters)"
             maxlength="100"
           />
           <div class="genre-container">
             <label v-for="genre in genres" :key="genre">
-              <input type="checkbox" :value="genre" v-model="movieData.genre" />
+              <input
+                name="genre"
+                type="checkbox"
+                :value="genre"
+                v-model="movieData.genre"
+              />
               {{ genre }}
             </label>
           </div>
           <input
+            name="rating"
             type="number"
             v-model="movieData.rating"
             placeholder="Rating (1-10)"
@@ -199,6 +208,7 @@ function closeDeleteModal() {
             max="10"
           />
           <input
+            name="releaseYear"
             type="number"
             v-model="movieData.releaseYear"
             placeholder="Release Year"
@@ -206,6 +216,7 @@ function closeDeleteModal() {
             :max="currentYear"
           />
           <input
+            name="coverImage"
             type="url"
             v-model="movieData.coverImage"
             placeholder="Cover Image URL"
@@ -213,7 +224,12 @@ function closeDeleteModal() {
         </div>
 
         <div class="actions">
-          <button class="white-button" v-if="isEditing" @click="handleOnSubmit">
+          <button
+            class="white-button"
+            v-if="isEditing"
+            @click="handleOnSubmit"
+            data-testid="confirm-edit-movie"
+          >
             <Save />Save Changes
           </button>
           <button v-if="isEditing" @click="isEditing = false">
@@ -224,10 +240,15 @@ function closeDeleteModal() {
             class="white-button"
             v-if="!isEditing"
             @click="isEditing = true"
+            data-testid="edit-movie"
           >
             <Popcorn />Edit
           </button>
-          <button v-if="!isEditing" @click="openDeleteModal">
+          <button
+            v-if="!isEditing"
+            @click="openDeleteModal"
+            data-testid="delete-movie"
+          >
             <Trash2 />Delete
           </button>
         </div>

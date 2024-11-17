@@ -17,7 +17,7 @@ const props = defineProps({
 
     <div class="separator-vertical" />
 
-    <button @click="emit('clickAction')">
+    <button @click="emit('clickAction')" data-testid="add-movie">
       <component :is="props.withBackButton ? Undo2 : SquarePlus" />
       {{ props.withBackButton ? 'Back' : 'Add Movie' }}
     </button>
