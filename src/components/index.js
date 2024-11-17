@@ -1,7 +1,8 @@
 import Loading from './Loading.vue';
 import Header from './Header.vue';
 import Search from './Search.vue';
-import AddMovieModal from './AddMovieModal.vue';
+import AddModal from './AddModal.vue';
+import DeleteModal from './DeleteModal.vue';
 import MovieCard from './MovieCard.vue';
 
-export default { Loading, Header, Search, AddMovieModal, MovieCard };
+export default { Loading, Header, Search, AddModal, DeleteModal, MovieCard };

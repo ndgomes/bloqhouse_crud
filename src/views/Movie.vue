@@ -23,6 +23,7 @@ const genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Thriller'];
 // Get the current year dynamically
 const currentYear = new Date().getFullYear();
 
+const showDeleteModal = ref(false);
 const movieId = ref(route.params.id);
 const isEditing = ref(false);
 
@@ -133,6 +134,13 @@ function backToHome() {
 
 <template>
   <div>
+    <!-- Load Modal Component to Delete a Movie -->
+    <Components.DeleteModal
+      v-if="showDeleteModal"
+      @confirmDelete="handleOnDelete"
+      @close="showDeleteModal = false"
+    />
+
     <!-- Header with Add Movie Button -->
     <Components.Header @clickAction="backToHome" :withBackButton="true" />
 
@@ -209,7 +217,7 @@ function backToHome() {
           >
             <Popcorn />Edit
           </button>
-          <button v-if="!isEditing" @click="handleOnDelete">
+          <button v-if="!isEditing" @click="showDeleteModal = true">
             <Trash2 />Delete
           </button>
         </div>

@@ -56,7 +56,7 @@ function closeAddModal() {
 <template>
   <div>
     <!-- Load Modal Component to Add or Update a Movie -->
-    <Components.AddMovieModal v-if="showAddModal" @close="closeAddModal" />
+    <Components.AddModal v-if="showAddModal" @close="closeAddModal" />
 
     <!-- Header with Add Movie Button -->
     <Components.Header @clickAction="openAddModal" :withBackButton="false" />
