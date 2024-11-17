@@ -28,13 +28,21 @@ cd bloqhouse_crud
 ### 2. Install dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 3. Run the application
 
 ```bash
-npm run dev
+pnpm dev
+```
+
+### 4. Run e2e tests
+
+- First ensure you have application running
+
+```bash
+pnpm cypress run --spec "cypress/e2e/manage-movie.cy.js"
 ```
 
 ## How to Use
