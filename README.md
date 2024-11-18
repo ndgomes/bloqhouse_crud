@@ -63,4 +63,4 @@ pnpm cypress run --spec "cypress/e2e/manage-movie.cy.js"
 
 ### Notes
 
-- Including the .env file in this repository is generally considered a bad practice due to security risks. However, I have intentionally left it here to simplify the setup process. This allows you to clone the project, install dependencies, and run it immediately without requiring additional configuration. All the tokens in it will soon cease to function.
+- Including the **.env** file in this repository is generally considered a bad practice due to security risks. However, I have intentionally left it here to simplify the setup process. This allows you to clone the project, install dependencies, and run it immediately without requiring additional configuration. All the tokens in it will soon cease to function.
