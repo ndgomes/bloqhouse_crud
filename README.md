@@ -60,3 +60,7 @@ pnpm cypress run --spec "cypress/e2e/manage-movie.cy.js"
   - **firebase.js** – Contains Firebase initialization and Firestore configurations.
   - **App.vue** – Main Vue component rendering the list of movie cards.
   - **assets/** – Holds static files like images or stylesheets.
+
+### Notes
+
+- Including the .env file in this repository is generally considered a bad practice due to security risks. However, I have intentionally left it here to simplify the setup process. This allows you to clone the project, install dependencies, and run it immediately without requiring additional configuration. All the tokens in it will soon cease to function.
