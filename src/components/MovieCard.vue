@@ -1,4 +1,5 @@
 <script setup>
+import { isValidCoverImage } from '@/util/imageUtils';
 import { ref, onMounted, computed } from 'vue';
 
 const emit = defineEmits(['clickCard']);
@@ -10,28 +11,18 @@ const props = defineProps({
   },
 });
 
+const isCoverImageValid = ref(true);
 const fallbackCoverImage =
   'https://m.media-amazon.com/images/I/61s8vyZLSzL._AC_UF894,1000_QL80_.jpg';
 
-const isImageValid = ref(false);
-
-async function isValidImage(url) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = url;
-  });
-}
-
 // Validate the image when the component is mounted
 onMounted(async () => {
-  isImageValid.value = await isValidImage(props.data.coverImage);
+  isCoverImageValid.value = await isValidCoverImage(props.data.coverImage);
 });
 
 // Computed property for the valid image URL
 const validCoverImage = computed(() => {
-  return isImageValid.value ? props.data.coverImage : fallbackCoverImage;
+  return isCoverImageValid.value ? props.data.coverImage : fallbackCoverImage;
 });
 </script>
 
