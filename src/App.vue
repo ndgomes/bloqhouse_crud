@@ -3,7 +3,6 @@ import { Analytics } from '@vercel/analytics/vue';
 import { ref, onMounted } from 'vue';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '@/firebase';
-import Views from '@/views';
 import Components from '@/components';
 
 const isLoading = ref(true);

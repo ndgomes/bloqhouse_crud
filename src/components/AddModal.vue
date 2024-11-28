@@ -4,6 +4,7 @@ import { db } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { SquarePlus, X } from 'lucide-vue-next';
 import { useToast } from 'vue-toastification';
+import { isFormValid } from '@/util/formValidationUtils';
 
 const toast = useToast();
 
@@ -30,24 +31,12 @@ const genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Thriller'];
 // Get the current year dynamically
 const currentYear = new Date().getFullYear();
 
-// Validation required fields
-function isFormValid() {
-  return (
-    movieData.value.title.length <= 80 &&
-    movieData.value.description.length <= 100 &&
-    movieData.value.genre.length &&
-    movieData.value.rating >= 1 &&
-    movieData.value.rating <= 10 &&
-    movieData.value.releaseYear >= 1800 &&
-    movieData.value.releaseYear <= currentYear &&
-    movieData.value.coverImage
-  );
-}
-
 // Submit handler for add movie
 async function handleOnSubmit() {
-  if (!isFormValid()) {
-    toast.error('Form is not valid. Please fill out all fields or try again.');
+  const { isValid, errors } = isFormValid(movieData.value);
+
+  if (!isValid) {
+    toast.error(`${errors[0]}`);
     return;
   }
 

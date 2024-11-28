@@ -79,7 +79,6 @@ function closeAddModal() {
         v-for="movie in filteredMovies"
         :key="movie.id"
       >
-        <!-- @clickCard="toggleManageModal(movie, false)" -->
         <Components.MovieCard
           :data="movie"
           @clickCard="handleOnClickCard(movie.id)"

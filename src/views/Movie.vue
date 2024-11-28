@@ -2,10 +2,12 @@
 import { ref, watch, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { db } from '@/firebase';
-import Components from '@/components';
 import { Save, Ban, Popcorn, Trash2 } from 'lucide-vue-next';
 import { useToast } from 'vue-toastification';
+import { db } from '@/firebase';
+import Components from '@/components';
+import { isValidCoverImage } from '@/util/imageUtils';
+import { isFormValid } from '@/util/formValidationUtils';
 
 const toast = useToast();
 const route = useRoute();
@@ -48,15 +50,6 @@ watch(
   }
 );
 
-async function isValidImage(url) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = url;
-  });
-}
-
 onMounted(async () => {
   // Redirect to home if the movie is not found
   if (!selectedMovieData.value) {
@@ -65,7 +58,7 @@ onMounted(async () => {
   }
 
   const selectedMovie = { ...selectedMovieData.value };
-  const isValid = await isValidImage(selectedMovie.coverImage);
+  const isValid = await isValidCoverImage(selectedMovie.coverImage);
 
   movieData.value = {
     ...movieData.value,
@@ -76,24 +69,12 @@ onMounted(async () => {
   };
 });
 
-// Validation required fields
-function isFormValid() {
-  return (
-    movieData.value.title.length <= 80 &&
-    movieData.value.description.length <= 100 &&
-    movieData.value.genre.length &&
-    movieData.value.rating >= 1 &&
-    movieData.value.rating <= 10 &&
-    movieData.value.releaseYear >= 1800 &&
-    movieData.value.releaseYear <= currentYear &&
-    movieData.value.coverImage
-  );
-}
-
 // Submit handler for add/update movie
 async function handleOnSubmit() {
-  if (!isFormValid()) {
-    toast.error('Form is not valid. Please fill out all fields or try again.');
+  const { isValid, errors } = isFormValid(movieData.value);
+
+  if (!isValid) {
+    toast.error(`${errors[0]}`);
     return;
   }
 
@@ -125,6 +106,15 @@ async function handleOnDelete() {
   } catch (error) {
     console.error('!! Error deleting:', error);
   }
+}
+
+// Cancel movie edit
+function cancelEdit() {
+  movieData.value = {
+    ...selectedMovieData.value,
+  };
+
+  isEditing.value = false;
 }
 
 function backToHome() {
@@ -231,9 +221,7 @@ function closeDeleteModal() {
           >
             <Save />Save Changes
           </button>
-          <button v-if="isEditing" @click="isEditing = false">
-            <Ban />Cancel
-          </button>
+          <button v-if="isEditing" @click="cancelEdit"><Ban />Cancel</button>
 
           <button
             class="white-button"
