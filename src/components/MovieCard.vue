@@ -63,8 +63,6 @@ const validCoverImage = computed(() => {
 
 .cover-image {
   min-height: 60%;
-  background-size: cover;
-  background-position: center;
   border-radius: 1rem 1rem 0 0;
 }
 

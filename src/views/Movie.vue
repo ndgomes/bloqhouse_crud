@@ -80,13 +80,9 @@ async function handleOnSubmit() {
 
   try {
     // Update an existing movie
-    await updateDoc(
-      doc(db, 'movies', movieData.value.id),
-      movieData.value
-    ).then(() => {
-      isEditing.value = false;
-      window.location.reload();
-    });
+    await updateDoc(doc(db, 'movies', movieData.value.id), movieData.value);
+    isEditing.value = false;
+    window.location.reload();
   } catch (error) {
     console.error('!! Error adding/updating:', error);
   }
