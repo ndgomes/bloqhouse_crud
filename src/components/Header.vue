@@ -13,7 +13,7 @@ const props = defineProps({
 
 <template>
   <header>
-    <p><span>bloq</span>Movies</p>
+    <p><span>my</span>Movies</p>
 
     <div class="separator-vertical" />
 

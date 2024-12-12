@@ -1,6 +1,6 @@
 ![](./src/assets/logo.svg)
 
-# Bloqhouse Movie CRUD App
+# myMovies CRUD App
 
 This is a simple web application built using **Vue.js 3** as the frontend framework and **Firebase** as the backend. The app allows users to manage their favorite movies by providing **CRUD** (Create, Read, Update, Delete) functionalities.
 
@@ -21,8 +21,8 @@ This is a simple web application built using **Vue.js 3** as the frontend framew
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/ndgomes/bloqhouse_crud.git
-cd bloqhouse_crud
+git clone https://github.com/ndgomes/myMovies_crud.git
+cd myMovies_crud
 ```
 
 ### 2. Install dependencies
