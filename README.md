@@ -1,5 +1,3 @@
-![](./src/assets/logo.svg)
-
 # myMovies CRUD App
 
 This is a simple web application built using **Vue.js 3** as the frontend framework and **Firebase** as the backend. The app allows users to manage their favorite movies by providing **CRUD** (Create, Read, Update, Delete) functionalities.
